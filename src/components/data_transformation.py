@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder,StandardScaler
+from sklearn.preprocessing import OneHotEncoder,StandardScaler, LabelEncoder
 
 from src.exception import CustomException
 from src.logger import logging
@@ -41,19 +41,19 @@ class DataTransformation:
                                 "rating_score"
                                  ]
 
-            # num_pipeline= Pipeline(
-            #     steps=[
-            #     ("imputer",SimpleImputer(strategy="median")),
-            #     ("scaler",StandardScaler())
+            num_pipeline= Pipeline(
+                steps=[
+                ("imputer",SimpleImputer(strategy="median")),
+                ("scaler",StandardScaler())
 
-            #     ]
-            # )
+                ]
+            )
 
             cat_pipeline=Pipeline(
 
                 steps=[
-                # ("imputer",SimpleImputer(strategy="most_frequent")),
-                ("one_hot_encoder",OneHotEncoder()),
+                ("imputer",SimpleImputer(strategy="most_frequent")),
+                # ("encoder",LabelEncoder()),
                 # ("scaler",StandardScaler(with_mean=False))
                 ]
 
@@ -64,7 +64,7 @@ class DataTransformation:
 
             preprocessor=ColumnTransformer(
                 [
-                # ("num_pipeline",num_pipeline,numerical_columns),
+                ("num_pipeline",num_pipeline,numerical_columns),
                 ("cat_pipelines",cat_pipeline,categorical_columns)
 
                 ]
@@ -88,25 +88,42 @@ class DataTransformation:
             logging.info("Obtaining preprocessing object")
 
             preprocessing_obj=self.get_data_transformer_object()
-
+            train_comlim = [
+                                "user_id",
+                                "product_id"
+                                 ]
             target_column_name="rating"
             numerical_columns = ["discounted_price", "discount_percentage", 
                                  "actual_price","rating_count",
                                  "difference_price","neg","neu","pos","compound"]
 
+            
+            
+            
+            for column in train_df.select_dtypes(include=['object']).columns:
+                le = LabelEncoder()
+                train_df[column] = le.fit_transform(train_df[column])
+
+            for column in test_df.select_dtypes(include=['object']).columns:
+                le = LabelEncoder()
+                test_df[column] = le.fit_transform(test_df[column])
+                
             # input_feature_train_df=train_df.drop(columns=[target_column_name],axis=1)
             # target_feature_train_df=train_df[target_column_name]
 
             # input_feature_test_df=test_df.drop(columns=[target_column_name],axis=1)
             # target_feature_test_df=test_df[target_column_name]
+           
+
+
 
             logging.info(
                 f"Applying preprocessing object on training dataframe and testing dataframe."
             )
-
-            input_feature_train_arr=preprocessing_obj.fit_transform(train_df)
-            input_feature_test_arr=preprocessing_obj.fit_transform(test_df)
-
+            # print(train_df)
+            # input_feature_train_arr=preprocessing_obj.fit_transform(train_df)
+            # input_feature_test_arr=preprocessing_obj.fit_transform(test_df)
+            # print(input_feature_train_arr)
             # train_arr = np.c_[
             #     input_feature_train_arr, np.array(target_feature_train_df)
             # ]
@@ -123,9 +140,9 @@ class DataTransformation:
 
             return (
                 # train_arr,
-                input_feature_train_arr,
+                train_df,
                 # test_arr,
-                input_feature_test_arr,
+                test_df,
                 self.data_transformation_config.preprocessor_obj_file_path,
             )
         except Exception as e:
