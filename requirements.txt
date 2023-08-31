@@ -5,6 +5,7 @@ matplotlib
 scikit-learn
 dill
 tensorflow
+Flask
 # -e .
 
 

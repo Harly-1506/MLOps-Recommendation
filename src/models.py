@@ -4,11 +4,11 @@ import tensorflow as tf
 def CF_model(train, test):
     num_users = len(train['user_id'].unique())
     num_products = len(train['product_id'].unique())
-    compounds = len(train["compound"])
+
 
     user_input = tf.keras.layers.Input(shape=(1,))
     product_input = tf.keras.layers.Input(shape=(1,))
-    compounds_input = tf.keras.layers.Input(shape=(1,))
+
 
 
     user_embedding = tf.keras.layers.Embedding(num_users, 10)(user_input)
