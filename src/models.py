@@ -12,13 +12,13 @@ def CF_model(train, test):
 
 
     user_embedding = tf.keras.layers.Embedding(num_users, 10)(user_input)
-    dense_user_1 = tf.keras.layers.Dense(32, activation='relu')(user_embedding)
+    dense_user_1 = tf.keras.layers.Dense(128, activation='relu')(user_embedding)
     dense_user_2 = tf.keras.layers.Dense(16, activation='relu')(dense_user_1)
 
 
 
     product_embedding = tf.keras.layers.Embedding(num_products, 10)(product_input)
-    dense_product_1 = tf.keras.layers.Dense(32, activation='relu')(product_embedding)
+    dense_product_1 = tf.keras.layers.Dense(128, activation='relu')(product_embedding)
     dense_product_2 = tf.keras.layers.Dense(16, activation='relu')(dense_product_1)
 
 

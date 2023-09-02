@@ -52,7 +52,7 @@ class DataTransformation:
             cat_pipeline=Pipeline(
 
                 steps=[
-                ("imputer",SimpleImputer(strategy="most_frequent")),
+                # ("imputer",SimpleImputer(strategy="most_frequent")),
                 # ("encoder",LabelEncoder()),
                 # ("scaler",StandardScaler(with_mean=False))
                 ]

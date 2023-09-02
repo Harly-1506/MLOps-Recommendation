@@ -37,7 +37,7 @@ class ModelTrainer:
             )
             print(X_train)
             models = {
-                "CB_model":CB_model(),
+                # "CB_model":CB_model(),
                 "CF_model": CF_model(X_train, y_train)
             }
 
@@ -49,7 +49,7 @@ class ModelTrainer:
                 decay_rate=0.96,
                 staircase=True)
             adam = tf.keras.optimizers.legacy.Adam(learning_rate=lr_schedule)
-            loss = tf.losses.MeanSquaredError()
+            loss = tf.losses.MeanAbsoluteError()
             
 
             model_report:dict=evaluate_models(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,
@@ -65,7 +65,7 @@ class ModelTrainer:
             ]
             best_model = models[best_model_name]
 
-            # if best_model_score:
+            # if best_model_score < 1:
             #     raise CustomException("No best model found")
             # logging.info(f"Best found model on both training and testing dataset")
 
@@ -76,7 +76,7 @@ class ModelTrainer:
 
             predicted=best_model.predict([X_test['user_id'], X_test['product_id']])
 
-            r2_square = r2_score(y_test, predicted)
+            r2_square = mean_squared_error(y_test, predicted)
             return r2_square
             
 

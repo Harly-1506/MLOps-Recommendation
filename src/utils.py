@@ -46,9 +46,9 @@ def evaluate_models(X_train, y_train,X_test,y_test,models, optimizer, loss):
             y_train_pred = model.predict([X_train['user_id'], X_train['product_id']])
             y_test_pred = model.predict([X_test['user_id'], X_test['product_id']])
 
-            train_model_score = r2_score(y_train, y_train_pred)
+            train_model_score = mean_squared_error(y_train, y_train_pred)
 
-            test_model_score = r2_score(y_test, y_test_pred)
+            test_model_score = mean_squared_error(y_test, y_test_pred)
 
             report[list(models.keys())[i]] = test_model_score
 
