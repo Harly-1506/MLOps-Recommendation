@@ -21,8 +21,9 @@ def predict_datapoint():
         return render_template('home.html')
     else:
         data=CustomData(
-            gender=request.form.get('product_id'),
-            race_ethnicity=request.form.get('user_id'),
+            user_id=request.form.get('user_id'),
+            product_id=request.form.get('product_id')
+            
         )
         pred_df=data.get_data_as_data_frame()
         print(pred_df)
@@ -32,7 +33,7 @@ def predict_datapoint():
         print("Mid Prediction")
         results=predict_pipeline.predict(pred_df)
         print("after Prediction")
-        return render_template('home.html',results=results[0])
+        return render_template('home.html',results=results)
     
 
 if __name__=="__main__":

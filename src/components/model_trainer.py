@@ -68,6 +68,7 @@ class ModelTrainer:
             # if best_model_score < 1:
             #     raise CustomException("No best model found")
             # logging.info(f"Best found model on both training and testing dataset")
+            best_model.save("artifacts/testmodel")
 
             save_object(
                 file_path=self.model_trainer_config.trained_model_file_path,

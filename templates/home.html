@@ -1,38 +1,42 @@
 <html>
 <body>
     <div class="login">
-       <h1>Student Exam Performance Indicator</h1>
+       <h1>Web page Test</h1>
    
        <form action="{{ url_for('predict_datapoint')}}" method="post">
         <h1>
-            <legend>Student Exam Performance Prediction</legend>
+            <legend>Choose</legend>
         </h1>
-        <div class="mb-3">
-            <label class="form-label">Product</label>
-            <select class="form-control" name="product_id" placeholder="Enter you Product ID" required>
-                <option class="placeholder" selected disabled value="">Select product ID</option>
-                <option value="product_1">
-                    Male
-                </option>
-                <option value="product_2">
-                    Female
-                </option>
-            </select>
-        </div>
         <div class="mb-3">
             <label class="form-label">User</label>
             <select class="form-control" name="user_id" placeholder="Enter you ethnicity" required>
                 <option class="placeholder" selected disabled value="">Select User ID</option>
-                <option value="User_1">
-                    Group A
+                <option value="AG3D6O4STAQKAY2UVGEUV46KN35Q">
+                    AG3D6O4STAQKAY2UVGEUV46KN35Q
                 </option>
-                <option value="User_2">
-                    Group B
+                <option value="AG3D6O4STAQKAY2UVGEUV46KN35Q">
+                    AG3D6O4STAQKAY2UVGEUV46KN35Q
                 </option>
-                <option value="User_3">
-                    Group C
+                <option value="AHMY5CWJMMK5BJRBBSNLYT3ONILA">
+                    AHMY5CWJMMK5BJRBBSNLYT3ONILA
                 </option>
             </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Product</label>
+            <select class="form-control" name="product_id" placeholder="Enter you Product ID" required>
+                <option class="placeholder" selected disabled value="">Select product ID</option>
+                <option value="B07JW9H4J1">
+                    B07JW9H4J1
+                </option>
+                <option value="B08CF4SCNP">
+                    B08CF4SCNP
+                </option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="Give re" required />
         </div>
     </form>
     <h2>
