@@ -1,10 +1,10 @@
 import tensorflow as tf
-
+import numpy as np
 
 def CF_model(train, test):
-    num_users = len(train['user_id'].unique())
-    num_products = len(train['product_id'].unique())
-
+    num_users = len(np.unique(train[:,0]))
+    num_products =  len(np.unique(train[:,1]))
+    print(num_users)
 
     user_input = tf.keras.layers.Input(shape=(1,))
     product_input = tf.keras.layers.Input(shape=(1,))

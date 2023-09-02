@@ -12,7 +12,7 @@ from src.exception import CustomException
 from src.logger import logging
 import os
 
-from src.utils import save_object
+from src.utils import save_object, LabelEncoderTransformer
 
 @dataclass
 class DataTransformationConfig:
@@ -34,11 +34,11 @@ class DataTransformation:
             categorical_columns = [
                                 "user_id",
                                 "product_id",
-                                "user_name",
-                                "product_name",
-                                "category_1",
-                                "category_2",
-                                "rating_score"
+                                # "user_name",
+                                # "product_name",
+                                # "category_1",
+                                # "category_2",
+                                # "rating_score"
                                  ]
 
             num_pipeline= Pipeline(
@@ -53,7 +53,7 @@ class DataTransformation:
 
                 steps=[
                 # ("imputer",SimpleImputer(strategy="most_frequent")),
-                # ("encoder",LabelEncoder()),
+                ("encoder",LabelEncoderTransformer()),
                 # ("scaler",StandardScaler(with_mean=False))
                 ]
 
@@ -64,7 +64,7 @@ class DataTransformation:
 
             preprocessor=ColumnTransformer(
                 [
-                ("num_pipeline",num_pipeline,numerical_columns),
+                # ("num_pipeline",num_pipeline,numerical_columns),
                 ("cat_pipelines",cat_pipeline,categorical_columns)
 
                 ]
@@ -97,22 +97,21 @@ class DataTransformation:
                                  "actual_price","rating_count",
                                  "difference_price","neg","neu","pos","compound"]
 
+  
             
-            
-            
-            for column in train_df.select_dtypes(include=['object']).columns:
-                le = LabelEncoder()
-                train_df[column] = le.fit_transform(train_df[column])
+            # for column in train_df.select_dtypes(include=['object']).columns:
+            #     le = LabelEncoder()
+            #     train_df[column] = le.fit_transform(train_df[column])
 
-            for column in test_df.select_dtypes(include=['object']).columns:
-                le = LabelEncoder()
-                test_df[column] = le.fit_transform(test_df[column])
+            # for column in test_df.select_dtypes(include=['object']).columns:
+            #     le = LabelEncoder()
+            #     test_df[column] = le.fit_transform(test_df[column])
                 
-            # input_feature_train_df=train_df.drop(columns=[target_column_name],axis=1)
-            # target_feature_train_df=train_df[target_column_name]
+            input_feature_train_df=train_df.drop(columns=[target_column_name],axis=1)
+            target_feature_train_df=train_df[target_column_name]
 
-            # input_feature_test_df=test_df.drop(columns=[target_column_name],axis=1)
-            # target_feature_test_df=test_df[target_column_name]
+            input_feature_test_df=test_df.drop(columns=[target_column_name],axis=1)
+            target_feature_test_df=test_df[target_column_name]
            
 
 
@@ -120,14 +119,14 @@ class DataTransformation:
             logging.info(
                 f"Applying preprocessing object on training dataframe and testing dataframe."
             )
-            # print(train_df)
-            # input_feature_train_arr=preprocessing_obj.fit_transform(train_df)
-            # input_feature_test_arr=preprocessing_obj.fit_transform(test_df)
-            # print(input_feature_train_arr)
-            # train_arr = np.c_[
-            #     input_feature_train_arr, np.array(target_feature_train_df)
-            # ]
-            # test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
+            print(train_df)
+            input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_df)
+            input_feature_test_arr=preprocessing_obj.transform(input_feature_test_df)
+            print(input_feature_train_arr)
+            train_arr = np.c_[
+                input_feature_train_arr, np.array(target_feature_train_df)
+            ]
+            test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
 
             logging.info(f"Saved preprocessing object.")
 
@@ -137,12 +136,11 @@ class DataTransformation:
                 obj=preprocessing_obj
 
             )
-
             return (
-                # train_arr,
-                train_df,
-                # test_arr,
-                test_df,
+                train_arr,
+                # train_df,
+                test_arr,
+                # test_df,
                 self.data_transformation_config.preprocessor_obj_file_path,
             )
         except Exception as e:

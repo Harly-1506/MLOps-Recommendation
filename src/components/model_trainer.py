@@ -30,12 +30,12 @@ class ModelTrainer:
         try:
             logging.info("Split training and test input data")
             X_train,y_train,X_test,y_test=(
-                train_array,
-                train_array["rating"],
-                test_array,
-                test_array["rating"]
+                train_array[:,:-1],
+                train_array[:,-1],
+                test_array[:,:-1],
+                test_array[:,-1]
             )
-            print(X_train)
+            print(X_train.shape)
             models = {
                 # "CB_model":CB_model(),
                 "CF_model": CF_model(X_train, y_train)
@@ -74,7 +74,7 @@ class ModelTrainer:
                 obj=best_model
             )
 
-            predicted=best_model.predict([X_test['user_id'], X_test['product_id']])
+            predicted=best_model.predict([X_test[:, 0], X_test[:, 1]])
 
             r2_square = mean_squared_error(y_test, predicted)
             return r2_square
