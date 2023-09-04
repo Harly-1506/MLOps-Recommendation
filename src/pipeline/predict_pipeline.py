@@ -4,6 +4,7 @@ from src.exception import CustomException
 from src.utils import load_object
 import os
 import tensorflow as tf
+import numpy as np
 
 class PredictPipeline:
     def __init__(self):
@@ -25,10 +26,24 @@ class PredictPipeline:
         except Exception as e:
             raise CustomException(e,sys)
 
-    # def recommend_products(self,user_id, pred):
+    def recommend_products(self,model,user_id, pred, num_recommendations = 5):
 
+        all_products = np.unique(train['product_id'])
+        
+        # Tạo input cho mô hình với user_id cố định và tất cả sản phẩm
+        user_input = np.array([user_id] * len(all_products))
+        product_input = all_products
+        predicted_ratings = model.predict([user_input, product_input])
+        
+        # Lấy ra các chỉ số của các sản phẩm được recommend (có rating cao)
+        recommended_indices = np.argsort(predicted_ratings, axis=0)[-num_recommendations:][::-1]
+        
+        # Lấy danh sách các sản phẩm được recommend
+        recommended_products = all_products[recommended_indices]
+        
+        return recommended_products
 
-    #     pass
+        pass
 
 class CustomData:
     def __init__(  self,
