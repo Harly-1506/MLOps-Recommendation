@@ -37,7 +37,7 @@ class ModelTrainer:
             )
             print(X_train.shape)
             models = {
-                # "CB_model":CB_model(),
+                "CB_model":CB_model(),
                 "CF_model": CF_model(X_train, y_train)
             }
 
@@ -56,7 +56,7 @@ class ModelTrainer:
                                              models=models, optimizer = adam, loss = loss)
             
             ## To get best model score from dict
-            best_model_score = max(sorted(model_report.values()))
+            best_model_score = min(sorted(model_report.values()))
 
             ## To get best model name from dict
 
@@ -68,7 +68,7 @@ class ModelTrainer:
             # if best_model_score < 1:
             #     raise CustomException("No best model found")
             # logging.info(f"Best found model on both training and testing dataset")
-            best_model.save("artifacts/testmodel")
+            best_model.save("artifacts/model_data")
 
             save_object(
                 file_path=self.model_trainer_config.trained_model_file_path,
