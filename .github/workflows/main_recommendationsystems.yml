@@ -20,9 +20,17 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
+
+    - name: Set up virtual environment
+      run: |
+          python -m venv venv
+          source venv/bin/activate
+      shell: bash
+
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run your Python script
+
+    - name: Run Python script
       run: python src/components/data_ingestion.py 
 
     - name: Set up Docker Buildx
