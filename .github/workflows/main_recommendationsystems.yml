@@ -15,23 +15,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-
+    - name: cml_run
+      env:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        pip install -r requirements.txt
+        python src/components/data_ingestion.py 
     # - name: Set up virtual environment
-      # run: |
-      #     python -m venv venv
-      #     source venv/bin/activate
-      # shell: bash
-      - name: cml_run
-        env:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          pip install -r requirements.txt
-          python src/components/data_ingestion.py 
+    #   run: |
+    #       python -m venv venv
+    #       source venv/bin/activate
+    #   shell: bash
+
     # - name: Install dependencies
     #   run: pip install -r requirements.txt
 
