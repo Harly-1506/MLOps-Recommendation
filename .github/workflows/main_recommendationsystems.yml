@@ -18,22 +18,26 @@ jobs:
     - name: cml_run
       env:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pip install -r requirements.txt
+          python src/components/data_ingestion.py 
+
     # - name: Set up Python
     #   uses: actions/setup-python@v2
     #   with:
     #     python-version: 3.8
 
     # - name: Set up virtual environment
-    #   run: |
-    #       python -m venv venv
-    #       source venv/bin/activate
-    #   shell: bash
+      # run: |
+      #     python -m venv venv
+      #     source venv/bin/activate
+      # shell: bash
 
     # - name: Install dependencies
-      run: pip install -r requirements.txt
+    #   run: pip install -r requirements.txt
 
-    - name: Run Python script
-      run: python src/components/data_ingestion.py 
+    # - name: Run Python script
+    #   run: python src/components/data_ingestion.py 
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
