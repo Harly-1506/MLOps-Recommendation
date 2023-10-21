@@ -28,7 +28,7 @@ jobs:
       shell: bash
 
     - name: Install dependencies
-      run: python setup.py
+      run: pip install -r requirements.txt
 
     - name: Run Python script
       run: python src/components/data_ingestion.py 
