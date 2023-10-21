@@ -14,7 +14,7 @@ jobs:
     runs-on: 'ubuntu-latest'
     defaults:
       run:
-        working-directory: ./MLOps-Recommendation/
+        working-directory: ./
     steps:
     - uses: actions/checkout@v2
     - name: Run python code
