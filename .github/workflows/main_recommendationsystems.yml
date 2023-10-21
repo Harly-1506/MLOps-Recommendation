@@ -14,10 +14,10 @@ jobs:
     runs-on: 'ubuntu-latest'
     defaults:
       run:
-        working-directory: ./src
+        working-directory: ./MLOps-Recommendation/
     steps:
     - uses: actions/checkout@v2
-    - name: cml_run
+    - name: Run python code
       env:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
