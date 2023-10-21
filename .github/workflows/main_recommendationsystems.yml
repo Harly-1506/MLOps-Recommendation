@@ -21,7 +21,7 @@ jobs:
       env:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        pip install -r requirements.txt
+        python setup.py install
         python src/components/data_ingestion.py 
     # - name: Set up virtual environment
     #   run: |
