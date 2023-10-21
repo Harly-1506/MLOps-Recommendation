@@ -29,7 +29,7 @@ jobs:
     #       source venv/bin/activate
     #   shell: bash
 
-    - name: Install dependencies
+    # - name: Install dependencies
       run: pip install -r requirements.txt
 
     - name: Run Python script
