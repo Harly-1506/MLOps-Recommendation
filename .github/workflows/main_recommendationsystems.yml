@@ -25,6 +25,7 @@ jobs:
       run: |
           python -m venv venv
           source venv/bin/activate
+          export PYTHONPATH=$PYTHONPATH:/path/to/your/src
       shell: bash
 
     - name: Install dependencies
