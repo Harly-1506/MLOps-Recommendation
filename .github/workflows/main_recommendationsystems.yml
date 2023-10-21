@@ -15,10 +15,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
     - name: Train model
-    - run: |
+      run: |
         pip install -r requirements.txt
-        python data_ingestion.py
+        python src\components\data_ingestion.py  
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
