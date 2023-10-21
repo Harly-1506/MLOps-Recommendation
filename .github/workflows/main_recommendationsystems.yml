@@ -15,17 +15,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: cml_run
+      env:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Set up Python
+    #   uses: actions/setup-python@v2
+    #   with:
+    #     python-version: 3.8
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-
-    - name: Set up virtual environment
-      run: |
-          python -m venv venv
-          source venv/bin/activate
-      shell: bash
+    # - name: Set up virtual environment
+    #   run: |
+    #       python -m venv venv
+    #       source venv/bin/activate
+    #   shell: bash
 
     - name: Install dependencies
       run: pip install -r requirements.txt
