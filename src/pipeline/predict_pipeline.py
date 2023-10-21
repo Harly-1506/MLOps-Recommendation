@@ -30,15 +30,12 @@ class PredictPipeline:
 
         all_products = np.unique(train['product_id'])
         
-        # Tạo input cho mô hình với user_id cố định và tất cả sản phẩm
         user_input = np.array([user_id] * len(all_products))
         product_input = all_products
         predicted_ratings = model.predict([user_input, product_input])
         
-        # Lấy ra các chỉ số của các sản phẩm được recommend (có rating cao)
         recommended_indices = np.argsort(predicted_ratings, axis=0)[-num_recommendations:][::-1]
         
-        # Lấy danh sách các sản phẩm được recommend
         recommended_products = all_products[recommended_indices]
         
         return recommended_products

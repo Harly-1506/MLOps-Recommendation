@@ -68,4 +68,3 @@ def CB_model():
     model = tf.keras.models.Model(inputs=[input_user, input_item], outputs=output)
 
     return model
-# model.summary()

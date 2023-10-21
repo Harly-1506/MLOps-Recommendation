@@ -26,7 +26,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info("Entered the data ingestion method or component")
         try:
-            df=pd.read_csv('notebook/Sales_Amazon_Cleaned_final.csv')
+            df=pd.read_csv('artifacts/Sales_Amazon_Cleaned_final.csv')
             logging.info('Read the dataset as dataframe')
             
             user_id_counts = df['user_id'].value_counts()
