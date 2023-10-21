@@ -21,7 +21,9 @@ jobs:
       env:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        python setup.py --install
+        python -m venv venv
+        source venv/bin/activate
+        python setup.py install
         python src/components/data_ingestion.py 
     # - name: Set up virtual environment
     #   run: |
