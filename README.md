@@ -9,16 +9,16 @@ This repository demonstrates how to deploy an end-to-end ML application using **
 ## Getting Started 💡
 The data I use is [Amazon Sales Datasets](https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset). I only use a few basic properties of the dataset, you can explore it further yourself
 1. Data Ingestion :
-  - In the Data Ingestion phase, the initial step involves reading the data from a CSV file.
-  - Subsequently, the data is partitioned into training and testing sets, which are then saved as CSV files.
+    - In the Data Ingestion phase, the initial step involves reading the data from a CSV file.
+    - Subsequently, the data is partitioned into training and testing sets, which are then saved as CSV files.
 2. Data Transformation :
- - Preprocess data with scaling and encoding, saving as a PKL file.
+   - Preprocess data with scaling and encoding, saving as a PKL file.
 3. Model Training :
- - Train, evaluate, and chosee the best model.
+   - Train, evaluate, and chosee the best model.
 4. Prediction Pipeline :
- - Utilize pickle files for predictions in a Python environment.
+   - Utilize pickle files for predictions in a Python environment.
 5. Flask App creation :
- - Create web app
+   - Create web app
      
 ### Run in localhost:
 
@@ -40,6 +40,11 @@ docker login <registry>.azurecr.io
 docker push <registry>.azurecr.io/<name>:latest
 
 ```
+### Result
+![image](https://github.com/Harly-1506/MLOps-Recommendation/assets/86733695/16237030-94e2-4928-a5ab-815e458d2c7f)
+
+Website url: https://recommendationsystems.azurewebsites.net/
+
 ## Build your own project
 
 In this project, I've only established the fundamental components. You can explore additional enhancements, such as Optimizing Model Parameters, Advanced Data Processing, Implement Feature Engineering, Continuous Integration. By incorporating these ideas and utilizing DVC for version control and data management, you can take your project to the next level, making it more robust, adaptable, and efficient.
