@@ -43,7 +43,7 @@ docker push <registry>.azurecr.io/<name>:latest
 ### Result
 ![image](https://github.com/Harly-1506/MLOps-Recommendation/assets/86733695/16237030-94e2-4928-a5ab-815e458d2c7f)
 
-Website url: https://recommendationsystems.azurewebsites.net/
+Website url: https://recommendationsystems.azurewebsites.net
 
 ## Build your own project
 
